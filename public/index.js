@@ -33,6 +33,17 @@ function calculate() {
 	try {
 		display.value = eval(display.value);
 		
+		//Send this to the webserver
+		fetch("/api", {
+			method: "POST",
+			body: JSON.stringify({
+				data: display.value
+			}),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8"
+			}
+		});
+		
 		//If the user tries to devide by 0, then show them the message
 		if(display.value == "Infinity") {
 			if(mobileScreen.matches) {
